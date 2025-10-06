@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - Prakiraan Cuaca</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="min-h-screen bg-gradient-animation p-4 md:p-8">
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <div class="flex items-center gap-3">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-cloud-sun text-4xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl md:text-4xl font-bold">Weather App</h1>
+                        <p class="text-sm opacity-90 mt-1">Prakiraan Cuaca Real-Time</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Box -->
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-map-marker-alt text-indigo-400 text-lg"></i>
+                    <input 
+                        type="text" 
+                        id="cityInput" 
+                        class="search-input" 
+                        placeholder="Cari kota... (Jakarta, Surabaya, Bali)"
+                        autocomplete="off"
+                    >
+                    <button id="searchBtn" class="search-button">
+                        <i class="fas fa-search"></i>
+                        <span class="ml-2 hidden md:inline">Cari</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Weather Info -->
+            <div id="weatherInfo" class="weather-info hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Left Column - Weather Details -->
+                    <div class="space-y-6">
+                        <!-- Main Weather Card -->
+                        <div class="card">
+                            <div class="text-center">
+                                <div class="flex items-center justify-center gap-2 mb-2">
+                                    <i class="fas fa-location-dot text-indigo-400"></i>
+                                    <h2 id="cityName" class="text-3xl md:text-4xl font-bold">Nama Kota</h2>
+                                </div>
+                                <img id="weatherIcon" src="" alt="Weather Icon" class="weather-icon">
+                                <p id="temperature" class="text-7xl md:text-8xl font-bold gradient-text mb-2">--°C</p>
+                                <p id="description" class="text-xl md:text-2xl capitalize opacity-90">Kondisi</p>
+                            </div>
+                        </div>
+
+                        <!-- Stats Cards -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="stat-card">
+                                <div class="stat-icon bg-blue-500/20">
+                                    <i class="fas fa-droplet text-blue-400 text-2xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm opacity-70 mb-1">Kelembapan</p>
+                                    <p id="humidity" class="text-2xl md:text-3xl font-bold">--%</p>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-icon bg-emerald-500/20">
+                                    <i class="fas fa-wind text-emerald-400 text-2xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm opacity-70 mb-1">Kecepatan Angin</p>
+                                    <p id="windSpeed" class="text-2xl md:text-3xl font-bold">-- km/h</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column - Map -->
+                    <div class="card">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="stat-icon bg-purple-500/20">
+                                <i class="fas fa-map text-purple-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Lokasi Peta</h3>
+                        </div>
+                        <div id="map" class="map-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message hidden">
+                <i class="fas fa-exclamation-circle text-2xl"></i>
+                <div>
+                    <p class="font-semibold">Kota tidak ditemukan</p>
+                    <p class="text-sm opacity-90">Silakan coba dengan nama kota lain</p>
+                </div>
+            </div>
+
+            <!-- Initial Message -->
+            <div id="initialMessage" class="initial-message">
+                <div class="text-center">
+                    <div class="inline-block p-6 bg-white/10 rounded-full mb-4">
+                        <i class="fas fa-search text-5xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Mulai Pencarian</h3>
+                    <p class="opacity-90">Masukkan nama kota untuk melihat prakiraan cuaca dan lokasi di peta</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-8 text-white/70 text-sm">
+            <p>© 2025 Weather App | Data dari OpenWeatherMap</p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="weather.js"></script>
+    <script src="map.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
